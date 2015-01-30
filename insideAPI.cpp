@@ -48,7 +48,7 @@ LIB_LOGS_BEGIN
 	std::vector<std::wstring> vPaths;
 	std::wstring strTemp;
 	
-	for (int i = 0; i < strPath.length(); ++i)
+	for (size_t i = 0; i < strPath.length(); ++i)
 	{
 		if (strPath.at(i) != LIB_LOGS_SEPARATORY)
 		{

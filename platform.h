@@ -15,9 +15,9 @@
 
 //DLL
 #ifdef LIB_LOGS_EXPORTS
-#define LIB_LOGS_API //__declspec(dllexport)
+#define LIB_LOGS_API __declspec(dllexport)
 #else
-#define LIB_LOGS_API //__declspec(dllimport)
+#define LIB_LOGS_API __declspec(dllimport)
 #endif
 
 #else

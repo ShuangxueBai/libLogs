@@ -26,3 +26,8 @@
 *.exe
 *.out
 *.app
+# Dir
+.git/
+bin/
+ipch/
+x64/
