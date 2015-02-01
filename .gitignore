@@ -31,3 +31,5 @@
 bin/
 ipch/
 x64/
+libLogs/
+*.opensdf

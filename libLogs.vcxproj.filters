@@ -30,11 +30,11 @@
     <ClInclude Include="libLogsMacro.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="platform.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="timeShareLogsSystem.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libPlatform.h">
+      <Filter>Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4,7 +4,8 @@
 
 #ifndef INSIDE_API_H
 #define INSIDE_API_H
-#include "platform.h"
+#include <assert.h>
+#include "libPlatform.h"
 
 LIB_LOGS_BEGIN
 

@@ -7,15 +7,14 @@
 LIB_LOGS_BEGIN
 
 TimeShareLogsSystem::TimeShareLogsSystem()
-: mSaveDir("")
-, mConditionFunc(nullptr)
+: mMaxSize(1)
+,mMaxInterval(1)
 {
 	return;
 }
 
 TimeShareLogsSystem::~TimeShareLogsSystem()
 {
-	std::cout << "the TimeShareLogsSystem class destruct function is run ! " << std::endl;
 	closeLogsFile();
 	return;
 }
@@ -25,15 +24,21 @@ void TimeShareLogsSystem::setSaveDir(const char* logsFileDir)
 	if (logsFileDir)
 	{
 		if(!CreateFileDirectory(logsFileDir))
-			std::cout << "Don't create file directory! " << std::endl;
+			std::cout << "Create file directory " << std::string(logsFileDir) << " fail!" << std::endl; 
 		mSaveDir = std::move(std::string(logsFileDir));
 	}
 	return;
 }
 
-void TimeShareLogsSystem::setCreateNewFileConditionParam(CreateNewFileCondition condFunc)
+void TimeShareLogsSystem::setLogFileMaxSize(const int& maxSize_kb)
 {
-	mConditionFunc = condFunc;
+	mMaxSize = maxSize_kb;
+	return;
+}
+
+void TimeShareLogsSystem::setLogTimeMaxInterval(const int& maxInterval_h)
+{
+	mMaxInterval = maxInterval_h;
 	return;
 }
 
@@ -92,7 +97,7 @@ bool TimeShareLogsSystem::openSaveFile()
 	filePath.append(szBuffer);
 	
 	if(!CreateFileDirectory(filePath.c_str()))
-		std::cout << "Don't create file directory! " << std::endl;
+		std::cout << "Create file directory " << filePath << "fail!" << std::endl;
 
 	memset(szBuffer, 0, sizeof(char) * 64);
 	strftime(szBuffer, 64, "%Y%m%d_%H%M%S.txt", ptm);
@@ -120,7 +125,7 @@ bool TimeShareLogsSystem::openSaveFile()
 bool TimeShareLogsSystem::isCloseLogsFile()
 {
 	mCloseClock = clock();
-	return (mFile.is_open() && (mFile.tellp() > (LIB_LOGS_MAX_FILE_SIZE * 3000) || (mCloseClock - mCreateClock) > LIB_LOGS_MAX_CLOCK_INTERVAL));
+	return (mFile.is_open() && (mFile.tellp() > LIB_LOGS_MAX_FILE_SIZE * mMaxSize || (mCloseClock - mCreateClock) > LIB_LOGS_MAX_CLOCK_INTERVAL * mMaxInterval));
 }
 
 LIB_LOGS_END

@@ -19,7 +19,8 @@ public:
 	~TimeShareLogsSystem();
 
 	virtual void setSaveDir(const char* logsFileDir) override;
-	virtual void setCreateNewFileConditionParam(CreateNewFileCondition condFunc) override;
+	virtual void setLogFileMaxSize(const int& maxSize_kb) override;
+	virtual void setLogTimeMaxInterval(const int& maxInterval_h) override;
 	virtual void writeLogs(const char* logs) override;
 	virtual void closeLogsFile() override;
 
@@ -31,7 +32,8 @@ protected:
 	std::ofstream mFile;
     clock_t mCreateClock;
 	clock_t mCloseClock;
-	CreateNewFileCondition mConditionFunc;
+	int mMaxSize;
+	int mMaxInterval;
 };
 
 LIB_LOGS_END

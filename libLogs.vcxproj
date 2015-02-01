@@ -101,6 +101,13 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /y "$(TargetDir)$(TargetName).lib" "$(SolutionDir)libLogs\$(Platform)\$(ConfigurationName)";
+copy /y "$(TargetDir)$(TargetName).dll" "$(SolutionDir)libLogs\$(Platform)\$(ConfigurationName)";
+copy /y "$(ProjectDir)libLogs.h" "$(SolutionDir)libLogs\$(Platform)\$(ConfigurationName)\include";
+copy /y "$(ProjectDir)libPlatform.h" "$(SolutionDir)libLogs\$(Platform)\$(ConfigurationName)\include";</Command>
+      <Message>拷贝生成的最终库文件到指定路径libLogs下......</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -122,12 +129,13 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;LIB_LOGS_EXPORTS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <PrecompiledHeaderFile />
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -135,6 +143,15 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /y "$(TargetDir)$(TargetName).lib" "$(SolutionDir)libLogs\$(Platform)\$(ConfigurationName)";
+copy /y "$(TargetDir)$(TargetName).dll" "$(SolutionDir)libLogs\$(Platform)\$(ConfigurationName)";
+copy /y "$(ProjectDir)libLogs.h" "$(SolutionDir)libLogs\$(Platform)\$(ConfigurationName)\include";
+copy /y "$(ProjectDir)libPlatform.h" "$(SolutionDir)libLogs\$(Platform)\$(ConfigurationName)\include";</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>拷贝生成的最终库文件到指定路径libLogs下......</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -143,7 +160,7 @@
     <ClInclude Include="insideAPI.h" />
     <ClInclude Include="libLogs.h" />
     <ClInclude Include="libLogsMacro.h" />
-    <ClInclude Include="platform.h" />
+    <ClInclude Include="libPlatform.h" />
     <ClInclude Include="timeShareLogsSystem.h" />
   </ItemGroup>
   <ItemGroup>
