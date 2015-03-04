@@ -44,7 +44,7 @@ LIB_LOGS_BEGIN
 	if ( -1 == _access(dirPath, 0))
 	{
 
-#ifdef WIN32
+
 
 		lib_string strPath;
 		cToLib_string(strPath, dirPath);
@@ -74,14 +74,14 @@ LIB_LOGS_BEGIN
 		std::vector<lib_string>::iterator itera = vPaths.begin();
 		while (itera != vPaths.end())
 		{
+#ifdef WIN32
 			res = CreateDirectory(itera->c_str(), NULL) > 0;
-			itera++;
-		}//end while
-
 #else
 		//UINX of LINUX
-
+			res = mkdir(itera->c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 #endif
+			itera++;
+		}//end while
 	}
 	return res;
 }
