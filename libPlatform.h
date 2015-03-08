@@ -1,5 +1,5 @@
 /************************************************************************/
-/* 这里集合一些与平台相关的内容                                                                                   */
+/* About different platforms.                                            */
 /************************************************************************/
 
 #ifndef LIB_LOGS_PLATFORM_H
@@ -12,26 +12,31 @@
 #ifdef WIN32
 
 #include <windows.h>
+#include <tchar.h>
+#include <io.h>
 
-//DLL
 #ifdef LIB_LOGS_EXPORTS
 #define LIB_LOGS_API __declspec(dllexport)
 #else
 #define LIB_LOGS_API __declspec(dllimport)
 #endif
 
-#else
-//非DLL
-#include <unistd.h>
-#define LIB_LOGS_API
-#endif
-
-
-#ifdef WIN32
+#define libLog_localtime(ptm, lt) localtime_s((ptm), &(lt))
 #define LIB_LOGS_SEPARATORY '\\'
+
+
 #else
+
+// other os eg,unix or linux
+
+#include <unistd.h>
+#include <sys/stat.h>
+
+#define LIB_LOGS_API
+
+#define libLog_localtime(ptm, lt) localtime_r(&(lt), (ptm))
 #define LIB_LOGS_SEPARATORY '/'
-#endif 
+#endif
 
 
 #define LIB_LOGS_INTERFACE struct

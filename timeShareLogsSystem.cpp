@@ -52,7 +52,7 @@ void TimeShareLogsSystem::writeLogs(const char* logs)
 
 	time_t lt = time(nullptr);
 	tm* ptm = new tm;
-	localtime_s(ptm, &lt);
+    libLog_localtime(ptm,lt);
 
 	char szBuffer[64] = {0};
 	strftime(szBuffer, 64, "|<< %Y-%m-%d %H:%M:%S >>| ", ptm);
@@ -89,7 +89,7 @@ bool TimeShareLogsSystem::openSaveFile()
 	time_t lt = time(NULL);
 	tm* ptm = new tm;
 	char szBuffer[64] = {0};
-	localtime_s(ptm, &lt);
+    libLog_localtime(ptm, lt);
 	strftime(szBuffer, 64, "%Y%m%d", ptm);
 
 	std::string filePath = mSaveDir;
@@ -97,7 +97,7 @@ bool TimeShareLogsSystem::openSaveFile()
 	filePath.append(szBuffer);
 	
 	if(!CreateFileDirectory(filePath.c_str()))
-		std::cout << "Create file directory " << filePath << "fail!" << std::endl;
+		std::cout << "Create file directory " << filePath << " fail!" << std::endl;
 
 	memset(szBuffer, 0, sizeof(char) * 64);
 	strftime(szBuffer, 64, "%Y%m%d_%H%M%S.txt", ptm);

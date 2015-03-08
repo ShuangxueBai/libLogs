@@ -1,5 +1,5 @@
 /************************************************************************/
-/* 内部使用的公用函数API                                                                                                */
+/* The project used some inside APIs.                                   */
 /************************************************************************/
 
 #ifndef INSIDE_API_H
@@ -9,7 +9,7 @@
 
 LIB_LOGS_BEGIN
 
-	extern bool CreateFileDirectory(const char* dirPath);
+extern bool CreateFileDirectory(const char* dirPath);
 
 LIB_LOGS_END
 

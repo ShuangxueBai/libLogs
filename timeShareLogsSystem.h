@@ -1,5 +1,5 @@
 /************************************************************************/
-/* 设计一个时间和文件大小为新建日志文件。                                                              */
+/* A logs system that set max size of file and max interval of timer.   */
 /************************************************************************/
 #ifndef TIME_SHARE_LOGS_SYSTEM_H
 #define TIME_SHARE_LOGS_SYSTEM_H
@@ -10,7 +10,7 @@
 
 LIB_LOGS_BEGIN
 /**
- * 日志文件管理
+ * TimeShareLogsSystem
  */
 class TimeShareLogsSystem : public LibLogsSystem
 {

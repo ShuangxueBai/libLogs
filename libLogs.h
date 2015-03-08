@@ -9,13 +9,12 @@
 
 LIB_LOGS_BEGIN
 
-	enum LogsType
+enum LogsType
 {
 	TIME_SHARE = 0
-
 };
 
- LIB_LOGS_INTERFACE LIB_LOGS_API LibLogsSystem
+LIB_LOGS_INTERFACE LIB_LOGS_API LibLogsSystem
 {
 	virtual void setSaveDir(const char* logsFileDir) = 0;
 	virtual void setLogFileMaxSize(const int& maxSize_kb) = 0;

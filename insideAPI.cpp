@@ -1,7 +1,5 @@
 #include <stdlib.h>
-#include <io.h>
-#include <tchar.h>
-#include <string>
+#include <string.h>
 #include <iostream>
 #include <vector>
 #include "insideAPI.h"
@@ -17,7 +15,7 @@ LIB_LOGS_BEGIN
 #endif
 
 
-	static void cToLib_string( lib_string& des, const char* src)
+static void cToLib_string(lib_string& des, const char* src)
 {
 	assert(nullptr != src);
 #ifdef UNICODE
@@ -33,19 +31,16 @@ LIB_LOGS_BEGIN
 	des = lib_string(p);
 	DELETE_POINT(p);
 #else
-	des = lib_string(p);
+	des = lib_string(src);
 #endif
 }
 
 
-	bool CreateFileDirectory(const char* dirPath)
+bool CreateFileDirectory(const char* dirPath)
 {
 	bool res = true;
-	if ( -1 == _access(dirPath, 0))
+	if ( -1 == access(dirPath, 0))
 	{
-
-
-
 		lib_string strPath;
 		cToLib_string(strPath, dirPath);
 
@@ -74,13 +69,14 @@ LIB_LOGS_BEGIN
 		std::vector<lib_string>::iterator itera = vPaths.begin();
 		while (itera != vPaths.end())
 		{
+            
 #ifdef WIN32
-			res = CreateDirectory(itera->c_str(), NULL) > 0;
+            res = !(0 != CreateDirectory(itera->c_str(), NULL) && ERROR_ALREADY_EXISTS != GetLastError());
 #else
 		//UINX of LINUX
-			res = mkdir(itera->c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+            res = !(0 != mkdir(itera->c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH) && EEXIST != errno);
 #endif
-			itera++;
+			++itera;
 		}//end while
 	}
 	return res;
