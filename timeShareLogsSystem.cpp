@@ -124,8 +124,8 @@ bool TimeShareLogsSystem::openSaveFile()
 
 bool TimeShareLogsSystem::isCloseLogsFile()
 {
-	mCloseClock = clock();
-	return (mFile.is_open() && (mFile.tellp() > LIB_LOGS_MAX_FILE_SIZE * mMaxSize || (mCloseClock - mCreateClock) > LIB_LOGS_MAX_CLOCK_INTERVAL * mMaxInterval));
+	clock_t curClock = clock();
+	return (mFile.is_open() && (mFile.tellp() > LIB_LOGS_MAX_FILE_SIZE * mMaxSize || (curClock - mCreateClock) > LIB_LOGS_MAX_CLOCK_INTERVAL * mMaxInterval));
 }
 
 LIB_LOGS_END

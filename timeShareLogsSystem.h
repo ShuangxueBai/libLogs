@@ -30,8 +30,7 @@ protected:
 protected:
 	std::string mSaveDir;
 	std::ofstream mFile;
-    clock_t mCreateClock;
-	clock_t mCloseClock;
+        clock_t mCreateClock;
 	int mMaxSize;
 	int mMaxInterval;
 };
